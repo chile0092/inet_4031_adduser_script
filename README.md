@@ -1,6 +1,5 @@
 # INET4031 - Module 8 - Automating User Management
 
-# INET4031 Add Users Script and User List
 
 ## Program Description
 
