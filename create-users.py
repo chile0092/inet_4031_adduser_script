@@ -9,7 +9,7 @@ import os #This module is for handling the Current Working Directory, creating a
 
 import re #This module provides reglar expression matching operations similar to those found in Perl. It offers functions like search(), match(), finall(), etc.
 
-import sys #This module provides variables for better control over input or output.We can redirect the input and output to other devices. This can be done using three variables - stdin, stdout, and stderr.
+import sys #This module provides variables for better control over input or output. We can redirect the input and output to other devices. This can be done using three variables - stdin, stdout, and stderr.
 
 def main():
     for line in sys.stdin:
