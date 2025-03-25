@@ -26,19 +26,23 @@ The input file follow a structured format:
 
 **group** - The groups that the user should be added to. If no group is specified, the user is created without any group assignment.
 
+
 **Skipping a line:** To prevent a line from being processed, put a '#' in the beginning of the line of code (comment it out). 
 
 **Assign user to no groups:** If a user do not belong to any group, leave a '-' in the space of the group field.
 
 ### Command Excuction
 
-**To execute the scrip**t, ensure Python is installed and the script is executable:
+**To execute the script**, ensure Python is installed and the script is executable:
+
 `chmod a+x create-users.py`
 
 **To run the script, use:**
+
 `./create-users.py < create-users.input`
 
 **or use Python explicitly:**
+
 `sudo python create-users.py < create-users.input`
 (use `sudo python3 create-users.py < create-users.input` if Python 3 is installed)
 
