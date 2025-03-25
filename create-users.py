@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 
 # INET4031
@@ -19,52 +18,47 @@ def main():
         #The regular expression checks if the line starts with "#" to determine if it is comment.
         match = re.match("^#",line)
 
-        #This splits the input line by colons ":" to get the user details.
+        #This splits the input line by colons ":" to get the extract the users' details.
         fields = line.strip().split(':')
 
-        #REPLACE THESE COMMENTS with a single comment describing the logic of the IF 
-        #what would an appropriate comment be for describing what this IF statement is checking for?
-        #what happens if the IF statement evaluates to true?
-        #how does this IF statement rely on what happened in the prior two lines of code? The match and fields lines.
-        #the code clearly shows that the variables match and the length of fields is being checked for being != 5  so why is it doing that?
+        #The IF statement ensures that the format is correct.
+        #The IF statement will skip commented out lines (starting with "#") and lines that do not have exactly 5 fields.
         if match or len(fields) != 5:
             continue
 
-        #REPLACE THIS COMMENT - what is the purpose of the next three lines. How does it relate to what is stored in the passwd file?
-        username = fields[0]
-        password = fields[1]
-        gecos = "%s %s,,," % (fields[3],fields[2])
+        #These lines are used to extract user information from fields.
+        username = fields[0]   #The username for the new account.
+        password = fields[1]   #Password for new account.
+        gecos = "%s %s,,," % (fields[3],fields[2])   #Constructing the GECOS (user information) field. GECOS field is a field in the /etc/passwd file that hilds general info about user account.
 
-        #REPLACE THIS COMMENT - why is this split being done?
+        #Splitting group entries. If there are multiple groups, they are separated by commas.
         groups = fields[4].split(',')
 
-        #REPLACE THIS COMMENT - what is the point of this print statement?
+        #Letting the user know about the account creation process.
         print("==> Creating account for %s..." % (username))
-        #REPLACE THIS COMMENT - what is this line doing?  What will the variable "cmd" contain.
+        #Constructing the command to create the user with a disabled password and setting GECOS information.
         cmd = "/usr/sbin/adduser --disabled-password --gecos '%s' %s" % (gecos,username)
 
-        #REMOVE THIS COMMENT AFTER YOU UNDERSTAND WHAT TO DO - these statements are currently "commented out" as talked about in class
-        #The first time you run the code...what should you do here?  If uncommented - what will the os.system(cmd) statemetn attempt to do?
-        #print cmd
-        #os.system(cmd)
+        print(cmd)         #prints the command for debugging purposes. 
+        os.system(cmd)    #Executes the command to create another user.
 
-        #REPLACE THIS COMMENT - what is the point of this print statement?
+        #Informing about setting the password.
         print("==> Setting the password for %s..." % (username))
-        #REPLACE THIS COMMENT - what is this line doing?  What will the variable "cmd" contain. You'll need to lookup what these linux commands do.
+       
+       #Constructing the command to set the user's password.
+       #The command uses "echo" to pass the password twice, which is required by passwd.
         cmd = "/bin/echo -ne '%s\n%s' | /usr/bin/sudo /usr/bin/passwd %s" % (password,password,username)
 
-        #REMOVE THIS COMMENT AFTER YOU UNDERSTAND WHAT TO DO - these statements are currently "commented out" as talked about in class
-        #The first time you run the code...what should you do here?  If uncommented - what will the os.system(cmd) statemetn attempt to do?
-        #print cmd
-        #os.system(cmd)
+        print(cmd)         #prints the command for debugging purposes. 
+        os.system(cmd)    #Executes the command to set the password.
 
         for group in groups:
-            #REPLACE THIS COMMENT with one that answers "What is this IF statement looking for and why? If group !='-' what happens?"
+            #The IF statement is looking for the the character '-'. If the group is '-', it means the user shouldn't be added to any groups.
             if group != '-':
                 print("==> Assigning %s to the %s group..." % (username,group))
                 cmd = "/usr/sbin/adduser %s %s" % (username,group)
-                #print cmd
-                #os.system(cmd)
+                print(cmd)   #prints the command for debugging purposes. 
+                os.system(cmd)   #Executes the command to add user to the group.
 
 if __name__ == '__main__':
     main()
