@@ -15,10 +15,15 @@ This section provides an overview of how the script operates and how the user ca
 
 The input file follow a structured format: 
 *username:password:last_name:first_name:group*
+
 **username** - The login name for the user.
+
 **password** - The login password for the user.
+
 **last_name** - The user's last name.
+
 **first_name** - The user's first name.
+
 **group** - The groups that the user should be added to. If no group is specified, the user is created without any group assignment.
 
 **Skipping a line:** To prevent a line from being processed, put a '#' in the beginning of the line of code (comment it out). 
