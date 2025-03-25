@@ -50,8 +50,8 @@ The input file follow a structured format:
 
 A dry run is ran to ensure the code works with no errors without actually creating users in the system. To able a dry run, comment out the print(cmd) and os.system(cmd) statements in the script.
 
-`#print(cmd)  # Uncomment this to preview commands
+`#print(cmd)  # Uncomment this to preview commands`
 
-#os.system(cmd)  # Comment this out to prevent execution`
+`#os.system(cmd)  # Comment this out to prevent execution`
 
 When executed in this mode, the script will display the commands it would run but will not create any users or modify the system. 
