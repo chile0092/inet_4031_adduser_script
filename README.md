@@ -3,22 +3,45 @@
 
 ## Program Description
 
-Detailed and helpful description paragraph goes here.  Describe how the program will help the user.  It should talk about how the program is an automated way for the user to accomplish the manual task of adding users. Also include a description of what commands a user would normally use to add a user and then describe how those ***SAME COMMANDS*** are used by the script and automated.
+Manually managing user accounts in Linux can be time-consuming, error-prone, especially when handling multiple users. This useful Python script makes managing users in Linux automatic by reading user details from an input file and executing necessary commands to create users and assign them to groups. 
 
-## Program User Operation
+If a system administrator add an user manually, they would need to use the 'adduser' command. Then, they would need to add user first name, last name, group, and every information manually. With this Python script, the process is automated to save time, reduce errors, and ensure consistency in the process.
+  
+##  Program User Operation
 
-This section should describe the overall operation of the program. After reading this section user should know what to do to make it work.  Let the comments in your code explain "how" it work.
-
-This section should start off with a paragraph description, then have subsections for the following:
+This section provides an overview of how the script operates and how the user can execute it:
 
 ### Input File Format
-Explain the format of the input file.  What is the purpose of each field in a line.
-Explain what the user needs to do if they want to skip a line in the input file.
-Expalin what the user needs to do if they do not want a new user added to any groups.
+
+The input file follow a structured format: 
+*username:password:last_name:first_name:group*
+**username** - The login name for the user.
+**password** - The login password for the user.
+**last_name** - The user's last name.
+**first_name** - The user's first name.
+**group** - The groups that the user should be added to. If no group is specified, the user is created without any group assignment.
+
+**Skipping a line:** To prevent a line from being processed, put a '#' in the beginning of the line of code (comment it out). 
+
+**Assign user to no groups:** If a user do not belong to any group, leave a '-' in the space of the group field.
 
 ### Command Excuction
-Explain how the user runs the code.  Remind the user they may need to set the Python file to be executable.
-./create-users.py < createusers.input
+
+**To execute the scrip**t, ensure Python is installed and the script is executable:
+`chmod a+x create-users.py`
+
+**To run the script, use:**
+`./create-users.py < create-users.input`
+
+**or use Python explicitly:**
+`sudo python create-users.py < create-users.input`
+(use `sudo python3 create-users.py < create-users.input` if Python 3 is installed)
 
 ### "Dry Run"
-Explain what happens if the user elects to do a "dry run."  
+
+A dry run is ran to ensure the code works with no errors without actually creating users in the system. To able a dry run, comment out the print(cmd) and os.system(cmd) statements in the script.
+
+`#print(cmd)  # Uncomment this to preview commands
+#os.system(cmd)  # Comment this out to prevent execution`
+
+When executed in this mode, the script will display the commands it would run but will not create any users or modify the system. 

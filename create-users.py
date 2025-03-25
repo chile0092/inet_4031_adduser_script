@@ -15,7 +15,7 @@ def main():
     for line in sys.stdin:
 
         #Ignore comment lines in the input file, which means lines that start with "#".
-        #The regular expression checks if the line starts with "#" to determine if it is comment.
+        #The regular expression checks if the line starts with "#" to determine if it is a  comment.
         match = re.match("^#",line)
 
         #This splits the input line by colons ":" to get the extract the users' details.
@@ -39,7 +39,7 @@ def main():
         #Constructing the command to create the user with a disabled password and setting GECOS information.
         cmd = "/usr/sbin/adduser --disabled-password --gecos '%s' %s" % (gecos,username)
 
-        print(cmd)         #prints the command for debugging purposes. 
+        print(cmd)         #Prints the command for debugging purposes. 
         os.system(cmd)    #Executes the command to create another user.
 
         #Informing about setting the password.
@@ -49,7 +49,7 @@ def main():
        #The command uses "echo" to pass the password twice, which is required by passwd.
         cmd = "/bin/echo -ne '%s\n%s' | /usr/bin/sudo /usr/bin/passwd %s" % (password,password,username)
 
-        print(cmd)         #prints the command for debugging purposes. 
+        print(cmd)         #Prints the command for debugging purposes. 
         os.system(cmd)    #Executes the command to set the password.
 
         for group in groups:
@@ -57,7 +57,7 @@ def main():
             if group != '-':
                 print("==> Assigning %s to the %s group..." % (username,group))
                 cmd = "/usr/sbin/adduser %s %s" % (username,group)
-                print(cmd)   #prints the command for debugging purposes. 
+                print(cmd)   #Prints the command for debugging purposes. 
                 os.system(cmd)   #Executes the command to add user to the group.
 
 if __name__ == '__main__':
